@@ -1,0 +1,28 @@
+{
+  "eslint.format.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 120,
+  "cSpell.words": [
+    "anims",
+    "axulart",
+    "Gamepad",
+    "nineslice",
+    "Ritwick",
+    "Tilemap",
+    "Tilemaps",
+    "Tileset",
+    "tilesets",
+    "tweens"
+  ],
+  "editor.tokenColorCustomizations": {
+    "comments": "",
+    "textMateRules": []
+  },
+  "liveServer.settings.port": 5500
+}

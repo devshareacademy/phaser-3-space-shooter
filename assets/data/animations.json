@@ -1,0 +1,63 @@
+[
+  {
+    "key": "bullet",
+    "frameRate": 12,
+    "repeat": -1,
+    "assetKey": "bullet"
+  },
+  {
+    "key": "fighter_engine",
+    "frameRate": 12,
+    "repeat": -1,
+    "assetKey": "fighter_engine"
+  },
+  {
+    "key": "scout_engine",
+    "frameRate": 12,
+    "repeat": -1,
+    "assetKey": "scout_engine"
+  },
+  {
+    "key": "scout_destroy",
+    "frameRate": 12,
+    "repeat": 0,
+    "assetKey": "scout_destroy"
+  },
+  {
+    "key": "explosion",
+    "frames": [4, 5, 6, 7, 8, 9],
+    "frameRate": 12,
+    "repeat": 0,
+    "assetKey": "scout_destroy"
+  },
+  {
+    "key": "ship_engine_thruster",
+    "frameRate": 12,
+    "repeat": -1,
+    "assetKey": "ship_engine_thruster"
+  },
+  {
+    "key": "fighter_destroy",
+    "frameRate": 12,
+    "repeat": 0,
+    "assetKey": "fighter_destroy"
+  },
+  {
+    "key": "bg1",
+    "frameRate": 8,
+    "repeat": -1,
+    "assetKey": "bg1"
+  },
+  {
+    "key": "bg2",
+    "frameRate": 8,
+    "repeat": -1,
+    "assetKey": "bg2"
+  },
+  {
+    "key": "bg3",
+    "frameRate": 8,
+    "repeat": -1,
+    "assetKey": "bg3"
+  }
+]
