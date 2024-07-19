@@ -10,40 +10,19 @@
   "prettier.printWidth": 120,
   "cSpell.words": [
     "anims",
-    "AQUAVALOR",
     "axulart",
-    "CARNODUSK",
-    "forkme",
-    "FROSTSABER",
     "Gamepad",
-    "IGNIVOLT",
-    "IGUANIGNITE",
-    "kanban",
-    "Kenney",
-    "kenneys",
-    "leohpaz",
-    "MONSTERDEX",
     "nineslice",
-    "npcs",
-    "parabellum",
-    "PARAZOID",
-    "pimen",
     "Ritwick",
     "Tilemap",
     "Tilemaps",
     "Tileset",
     "tilesets",
-    "tweakpane",
-    "tweens",
-    "Watchon",
-    "webfont",
-    "webfontloader",
-    "xdeviruchi",
-    "yoyo"
+    "tweens"
   ],
   "editor.tokenColorCustomizations": {
     "comments": "",
     "textMateRules": []
   },
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5500
 }
