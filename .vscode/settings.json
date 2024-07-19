@@ -1,0 +1,49 @@
+{
+  "eslint.format.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 120,
+  "cSpell.words": [
+    "anims",
+    "AQUAVALOR",
+    "axulart",
+    "CARNODUSK",
+    "forkme",
+    "FROSTSABER",
+    "Gamepad",
+    "IGNIVOLT",
+    "IGUANIGNITE",
+    "kanban",
+    "Kenney",
+    "kenneys",
+    "leohpaz",
+    "MONSTERDEX",
+    "nineslice",
+    "npcs",
+    "parabellum",
+    "PARAZOID",
+    "pimen",
+    "Ritwick",
+    "Tilemap",
+    "Tilemaps",
+    "Tileset",
+    "tilesets",
+    "tweakpane",
+    "tweens",
+    "Watchon",
+    "webfont",
+    "webfontloader",
+    "xdeviruchi",
+    "yoyo"
+  ],
+  "editor.tokenColorCustomizations": {
+    "comments": "",
+    "textMateRules": []
+  },
+  "liveServer.settings.port": 5501
+}

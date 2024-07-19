@@ -1,0 +1,112 @@
+[
+  {
+    "path": "assets/images/foozle",
+    "files": [
+      {
+        "type": "image",
+        "key": "scout",
+        "url": "scout.png"
+      },
+      {
+        "type": "image",
+        "key": "fighter",
+        "url": "fighter.png"
+      },
+      {
+        "type": "image",
+        "key": "ship_engine",
+        "url": "ship_engine.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "bullet",
+        "url": "bullet.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "fighter_engine",
+        "url": "fighter_engine.png",
+        "frameConfig": { "frameWidth": 64, "frameHeight": 64 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "scout_engine",
+        "url": "scout_engine.png",
+        "frameConfig": { "frameWidth": 64, "frameHeight": 64 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "scout_destroy",
+        "url": "scout_destroy.png",
+        "frameConfig": { "frameWidth": 64, "frameHeight": 64 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "ship_engine_thruster",
+        "url": "ship_engine_thruster.png",
+        "frameConfig": { "frameWidth": 48, "frameHeight": 48 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "fighter_destroy",
+        "url": "fighter_destroy.png",
+        "frameConfig": { "frameWidth": 64, "frameHeight": 64 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "bg1",
+        "url": "bg1.png",
+        "frameConfig": { "frameWidth": 640, "frameHeight": 360 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "bg2",
+        "url": "bg2.png",
+        "frameConfig": { "frameWidth": 640, "frameHeight": 360 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "bg3",
+        "url": "bg3.png",
+        "frameConfig": { "frameWidth": 640, "frameHeight": 360 }
+      },
+      {
+        "type": "spritesheet",
+        "key": "ship",
+        "url": "ship.png",
+        "frameConfig": { "frameWidth": 48, "frameHeight": 48 }
+      }
+    ]
+  },
+  {
+    "path": "assets/audio/ansimuz",
+    "files": [
+      {
+        "type": "audio",
+        "key": "explosion",
+        "url": "explosion.wav"
+      },
+      {
+        "type": "audio",
+        "key": "hit",
+        "url": "hit.wav"
+      },
+      {
+        "type": "audio",
+        "key": "shot1",
+        "url": "shot_1.wav"
+      },
+      {
+        "type": "audio",
+        "key": "shot2",
+        "url": "shot_2.wav"
+      },
+      {
+        "type": "audio",
+        "key": "bg",
+        "url": "space_asteroids.wav"
+      }
+    ]
+  }
+]

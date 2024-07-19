@@ -1,0 +1,54 @@
+Project Setup:
+  ☐ download basic project files
+  ☐ running project on local web server
+  ☐ review basic project code
+  ☐ update game config
+  ☐ code planning
+
+Player:
+  ☐ create game objects
+  ☐ create animations
+  ☐ input and player movement
+  ☐ weapon
+
+Enemies:
+  ☐ create game object
+  ☐ create animations
+  ☐ basic AI movement
+  ☐ weapon
+
+Collisions:
+  ☐ collisions between enemies and player
+  ☐ collisions between bullets and ships
+  ☐ health component
+
+Enemy Spawners:
+  ☐ use groups to spawn multiple enemies from object pool
+  ☐ create group for ship explosions
+  ☐ update collisions to support groups
+  ☐ event bus component
+
+UI & Audio:
+  ☐ implement scoring
+  ☐ player lives
+  ☐ game audio
+  ☐ backgrounds
+
+
+
+-------------------------------
+
+Enhancement Ideas:
+  ☐ weapon powerups
+  ☐ mobile support
+  ☐ boss enemies
+  ☐ other enemy types
+  ☐ enemy waves
+  ☐ high scores
+  ☐ increased difficulty (score or time based)
+  ☐ spawn with shield or be invulnable for period of time
+  ☐ title, options, and credits scenes
+
+-------------------------------
+☐ ✔ ✘
+-------------------------------
