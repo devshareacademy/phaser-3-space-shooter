@@ -7,11 +7,6 @@ export class KeyboardInputComponent extends InputComponent {
 
   constructor(scene) {
     super();
-
-    if (!scene.input.keyboard === undefined) {
-      console.log('Phaser Keyboard Plugin is not enabled, KeyboardInputComponent will not work properly');
-      return;
-    }
     this.#cursorKeys = scene.input.keyboard.createCursorKeys();
   }
 

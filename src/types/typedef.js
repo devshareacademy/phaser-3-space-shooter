@@ -42,11 +42,3 @@
  *
  * @typedef {Phaser.GameObjects.Container & BaseEnemy} Enemy
  */
-
-/**
- * @param {Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody} body
- * @returns {body is Phaser.Physics.Arcade.Body}
- */
-export function isSpriteWithDynamicBody(body) {
-  return body.physicsType === Phaser.Physics.Arcade.DYNAMIC_BODY;
-}
