@@ -1,11 +1,13 @@
 import Phaser from '../lib/phaser.js';
+import { KeyboardInputComponent } from '../components/input/keyboard-input-component.js';
+import { HorizontalMovementComponent } from '../components/movement/horizontal-movement-component.js';
+import * as CONFIG from '../config.js';
 
 export class Player extends Phaser.GameObjects.Container {
-  /** @type {Phaser.GameObjects.Sprite} */
+  #keyboardInputComponent;
+  #horizontalMovementComponent;
   #shipSprite;
-  /** @type {Phaser.GameObjects.Sprite} */
   #shipEngineSprite;
-  /** @type {Phaser.GameObjects.Sprite} */
   #shipEngineThrusterSprite;
 
   constructor(scene) {
@@ -23,5 +25,30 @@ export class Player extends Phaser.GameObjects.Container {
     this.#shipEngineThrusterSprite = this.scene.add.sprite(0, 0, 'ship_engine_thruster', 0);
     this.#shipEngineThrusterSprite.play('ship_engine_thruster');
     this.add([this.#shipEngineThrusterSprite, this.#shipEngineSprite, this.#shipSprite]);
+
+    this.#keyboardInputComponent = new KeyboardInputComponent(this.scene);
+    this.#horizontalMovementComponent = new HorizontalMovementComponent(
+      this,
+      this.#keyboardInputComponent,
+      CONFIG.PLAYER_MOVEMENT_HORIZONTAL_VELOCITY
+    );
+
+    this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
+    this.once(
+      Phaser.GameObjects.Events.DESTROY,
+      () => {
+        this.scene.events.off(Phaser.Scenes.Events.UPDATE, this.update, this);
+      },
+      this
+    );
+  }
+
+  update(ts, dt) {
+    if (!this.active) {
+      return;
+    }
+
+    this.#keyboardInputComponent.update();
+    this.#horizontalMovementComponent.update();
   }
 }
