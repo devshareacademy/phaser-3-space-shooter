@@ -18,20 +18,23 @@ export class GameScene extends Phaser.Scene {
       if (!enemyGameObject.active || !playerGameObject.active) {
         return;
       }
-      console.log(playerGameObject, enemyGameObject);
+      playerGameObject.colliderComponent.collideWithEnemyShip();
+      enemyGameObject.colliderComponent.collideWithEnemyShip();
     });
     this.physics.add.overlap(player, this.enemy.weaponGameObjectGroup, (playerGameObject, projectileGameObject) => {
       if (!playerGameObject.active) {
         return;
       }
-      console.log(playerGameObject, projectileGameObject);
+      this.enemy.weaponComponent.destroyBullet(projectileGameObject);
+      playerGameObject.colliderComponent.collideWithEnemyProjectile();
     });
 
     this.physics.add.overlap(player.weaponGameObjectGroup, this.enemy, (enemyGameObject, projectileGameObject) => {
       if (!enemyGameObject.active) {
         return;
       }
-      console.log(projectileGameObject, enemyGameObject);
+      player.weaponComponent.destroyBullet(projectileGameObject);
+      enemyGameObject.colliderComponent.collideWithEnemyProjectile();
     });
   }
 
