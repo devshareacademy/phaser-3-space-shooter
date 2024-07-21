@@ -6,6 +6,7 @@ import { Player } from '../objects/player.js';
 import { CUSTOM_EVENTS, EventBusComponent } from '../components/events/event-bus-component.js';
 import { EnemySpawnerComponent } from '../components/spawner/enemy-spawner-component.js';
 import { EnemyDestroyedComponent } from '../components/spawner/enemy-destroyed-component.js';
+import { Score } from '../objects/ui/score.js';
 import * as CONFIG from '../config.js';
 
 export class GameScene extends Phaser.Scene {
@@ -85,5 +86,7 @@ export class GameScene extends Phaser.Scene {
         enemyGameObject.colliderComponent.collideWithEnemyProjectile();
       }
     );
+
+    new Score(this, eventBusComponent);
   }
 }
