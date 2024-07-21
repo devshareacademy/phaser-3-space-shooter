@@ -74,9 +74,8 @@ export class WeaponComponent {
         return;
       }
 
-      /** @type {number} */
-      (bullet.state) -= delta;
-      if (/** @type {number} */ (bullet.state) <= 0) {
+      bullet.state -= delta;
+      if (bullet.state <= 0) {
         bullet.disableBody(true, true);
       }
     });

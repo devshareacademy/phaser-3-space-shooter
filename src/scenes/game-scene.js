@@ -17,6 +17,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   create() {
+    // backgrounds
+    this.add.sprite(0, 0, 'bg1', 0).setOrigin(0, 1).setAlpha(0.7).play('bg1').setAngle(90).setScale(1, 1.25);
+    this.add.sprite(0, 0, 'bg2', 0).setOrigin(0, 1).setAlpha(0.7).play('bg2').setAngle(90).setScale(1, 1.25);
+    this.add.sprite(0, 0, 'bg3', 0).setOrigin(0, 1).setAlpha(0.7).play('bg3').setAngle(90).setScale(1, 1.25);
+
     const eventBusComponent = new EventBusComponent();
     const player = new Player(this, eventBusComponent);
 
