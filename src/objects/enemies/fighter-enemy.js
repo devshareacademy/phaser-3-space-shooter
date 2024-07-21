@@ -101,6 +101,9 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
       this.setActive(false);
       this.setVisible(false);
       this.#shipEngineSprite.setVisible(false);
+      if (this.#eventBusComponent !== undefined) {
+        this.#eventBusComponent.emit(CUSTOM_EVENTS.ENEMY_DESTROYED, this);
+      }
       return;
     }
 
