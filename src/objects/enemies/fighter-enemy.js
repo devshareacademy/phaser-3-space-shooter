@@ -40,6 +40,10 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
     });
   }
 
+  get weaponGameObjectGroup() {
+    return this.#weaponComponent.bulletGroup;
+  }
+
   update(ts, dt) {
     if (!this.active) {
       return;
