@@ -1,3 +1,4 @@
+export const PLAYER_LIVES = 3;
 export const PLAYER_HEALTH = 4;
 export const PLAYER_BULLET_SPEED = 300;
 export const PLAYER_BULLET_INTERVAL = 300;

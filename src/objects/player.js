@@ -4,6 +4,7 @@ import { HorizontalMovementComponent } from '../components/movement/horizontal-m
 import { WeaponComponent } from '../components/weapon/weapon-component.js';
 import { HealthComponent } from '../components/health/health-component.js';
 import { ColliderComponent } from '../components/collider/collider-component.js';
+import { CUSTOM_EVENTS } from '../components/events/event-bus-component.js';
 import * as CONFIG from '../config.js';
 
 export class Player extends Phaser.GameObjects.Container {
@@ -12,12 +13,14 @@ export class Player extends Phaser.GameObjects.Container {
   #horizontalMovementComponent;
   #healthComponent;
   #colliderComponent;
+  #eventBusComponent;
   #shipSprite;
   #shipEngineSprite;
   #shipEngineThrusterSprite;
 
-  constructor(scene) {
+  constructor(scene, eventBusComponent) {
     super(scene, scene.scale.width / 2, scene.scale.height - 32, []);
+    this.#eventBusComponent = eventBusComponent;
 
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
@@ -48,6 +51,10 @@ export class Player extends Phaser.GameObjects.Container {
     });
     this.#healthComponent = new HealthComponent(CONFIG.PLAYER_HEALTH);
     this.#colliderComponent = new ColliderComponent(this.#healthComponent);
+    this.#hide();
+
+    // register custom events
+    this.#eventBusComponent.on(CUSTOM_EVENTS.PLAYER_SPAWN, this.#spawn, this);
 
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     this.once(
@@ -82,6 +89,7 @@ export class Player extends Phaser.GameObjects.Container {
       this.#shipSprite.play({
         key: 'explosion',
       });
+      this.#eventBusComponent.emit(CUSTOM_EVENTS.PLAYER_DESTROYED);
       return;
     }
 
@@ -89,6 +97,17 @@ export class Player extends Phaser.GameObjects.Container {
     this.#keyboardInputComponent.update();
     this.#horizontalMovementComponent.update();
     this.#weaponComponent.update(dt);
+  }
+
+  #spawn() {
+    this.setActive(true);
+    this.setVisible(true);
+    this.#shipEngineSprite.setVisible(true);
+    this.#shipEngineThrusterSprite.setVisible(true);
+    this.#shipSprite.setTexture('ship', 0);
+    this.#healthComponent.reset();
+    this.setPosition(this.scene.scale.width / 2, this.scene.scale.height - 32);
+    this.#keyboardInputComponent.lockInput = false;
   }
 
   #hide() {
