@@ -8,6 +8,7 @@ import { EnemySpawnerComponent } from '../components/spawner/enemy-spawner-compo
 import { EnemyDestroyedComponent } from '../components/spawner/enemy-destroyed-component.js';
 import { Score } from '../objects/ui/score.js';
 import { Lives } from '../objects/ui/lives.js';
+import { AudioManager } from '../objects/audio-manager.js';
 import * as CONFIG from '../config.js';
 
 export class GameScene extends Phaser.Scene {
@@ -90,5 +91,6 @@ export class GameScene extends Phaser.Scene {
 
     new Score(this, eventBusComponent);
     new Lives(this, eventBusComponent);
+    new AudioManager(this, eventBusComponent);
   }
 }

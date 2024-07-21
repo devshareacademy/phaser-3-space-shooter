@@ -1,4 +1,5 @@
 import Phaser from '../../lib/phaser.js';
+import { CUSTOM_EVENTS } from '../events/event-bus-component.js';
 
 export class WeaponComponent {
   #gameObject;
@@ -6,11 +7,13 @@ export class WeaponComponent {
   #bulletGroup;
   #fireBulletInterval;
   #bulletConfig;
+  #eventBusComponent;
 
-  constructor(gameObject, inputComponent, bulletConfig) {
+  constructor(gameObject, inputComponent, bulletConfig, eventBusComponent) {
     this.#gameObject = gameObject;
     this.#inputComponent = inputComponent;
     this.#bulletConfig = bulletConfig;
+    this.#eventBusComponent = eventBusComponent;
     this.#fireBulletInterval = 0;
 
     this.#bulletGroup = this.#gameObject.scene.physics.add.group({
@@ -61,6 +64,7 @@ export class WeaponComponent {
       bullet.setFlipY(this.#bulletConfig.flipY);
 
       this.#fireBulletInterval = this.#bulletConfig.interval;
+      this.#eventBusComponent.emit(CUSTOM_EVENTS.SHIP_SHOOT);
     }
   }
 
