@@ -4,6 +4,7 @@ import { HorizontalMovementComponent } from '../../components/movement/horizonta
 import { VerticalMovementComponent } from '../../components/movement/vertical-movement-component.js';
 import { HealthComponent } from '../../components/health/health-component.js';
 import { ColliderComponent } from '../../components/collider/collider-component.js';
+import { CUSTOM_EVENTS } from '../../components/events/event-bus-component.js';
 import * as CONFIG from '../../config.js';
 
 export class ScoutEnemy extends Phaser.GameObjects.Container {
@@ -12,6 +13,7 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
   #verticalMovementComponent;
   #healthComponent;
   #colliderComponent;
+  #eventBusComponent;
   #shipSprite;
   #shipEngineSprite;
 
@@ -27,7 +29,26 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     this.#shipEngineSprite = this.scene.add.sprite(0, 0, 'scout_engine', 0).setFlipY(true);
     this.#shipEngineSprite.play('scout_engine');
     this.add([this.#shipSprite, this.#shipEngineSprite]);
+  }
 
+  get colliderComponent() {
+    return this.#colliderComponent;
+  }
+
+  get healthComponent() {
+    return this.#healthComponent;
+  }
+
+  get shipAssetKey() {
+    return 'scout';
+  }
+
+  get shipDestroyedAnimationKey() {
+    return 'scout_destroy';
+  }
+
+  init(eventBusComponent) {
+    this.#eventBusComponent = eventBusComponent;
     this.#inputComponent = new BotScoutInputComponent(this);
     this.#horizontalMovementComponent = new HorizontalMovementComponent(
       this,
@@ -41,17 +62,24 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     );
     this.#healthComponent = new HealthComponent(CONFIG.ENEMY_SCOUT_HEALTH);
     this.#colliderComponent = new ColliderComponent(this.#healthComponent);
+    this.#eventBusComponent.emit(CUSTOM_EVENTS.ENEMY_INIT, this);
   }
 
-  get colliderComponent() {
-    return this.#colliderComponent;
-  }
-
-  get healthComponent() {
-    return this.#healthComponent;
+  reset() {
+    this.#shipSprite.setTexture('scout');
+    this.#shipEngineSprite.setVisible(true);
+    this.setActive(true);
+    this.setVisible(true);
+    this.#healthComponent.reset();
+    this.#inputComponent.setStartX(this.x);
+    this.#verticalMovementComponent.reset();
+    this.#horizontalMovementComponent.reset();
   }
 
   update() {
+    if (this.#eventBusComponent === undefined) {
+      return;
+    }
     if (!this.active) {
       return;
     }
