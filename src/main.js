@@ -1,5 +1,7 @@
 import Phaser from './lib/phaser.js';
+import { BootScene } from './scenes/boot-scene.js';
 import { GameScene } from './scenes/game-scene.js';
+import { PreloadScene } from './scenes/preload-scene.js';
 
 const game = new Phaser.Game({
   type: Phaser.CANVAS,
@@ -22,5 +24,7 @@ const game = new Phaser.Game({
   },
 });
 
+game.scene.add('BootScene', BootScene);
+game.scene.add('PreloadScene', PreloadScene);
 game.scene.add('GameScene', GameScene);
-game.scene.start('GameScene');
+game.scene.start('BootScene');

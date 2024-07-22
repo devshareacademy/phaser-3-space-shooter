@@ -1,15 +1,16 @@
 import Phaser from '../lib/phaser.js';
+import { Player } from '../objects/player.js';
 
 export class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
   }
 
+  preload() {
+    this.load.pack('asset_pack', 'assets/data/assets.json');
+  }
+
   create() {
-    this.add
-      .text(this.scale.width / 2, this.scale.height / 2, 'Hello World', {
-        fontSize: '32px',
-      })
-      .setOrigin(0.5);
+    const player = new Player(this);
   }
 }
