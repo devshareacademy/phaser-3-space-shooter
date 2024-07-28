@@ -1,3 +1,5 @@
+import { ColliderComponent } from '../../components/collider/collider-component.js';
+import { HealthComponent } from '../../components/health/health-component.js';
 import { BotScoutInputComponent } from '../../components/input/bot-scout-input-component.js';
 import { HorizontalMovementComponent } from '../../components/movement/horizontal-movement-component.js';
 import { VerticalMovementComponent } from '../../components/movement/vertical-movement-component.js';
@@ -7,6 +9,8 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
   #inputComponent;
   #horizontalMovementComponent;
   #verticalMovementComponent;
+  #healthComponent;
+  #colliderComponent;
   #shipSprite;
   #shipEngineSprite;
 
@@ -34,6 +38,8 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
       this.#inputComponent,
       CONFIG.ENEMY_SCOUT_MOVEMENT_VERTICAL_VELOCITY
     );
+    this.#healthComponent = new HealthComponent(CONFIG.ENEMY_SCOUT_HEALTH);
+    this.#colliderComponent = new ColliderComponent(this.#healthComponent);
 
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     this.once(
@@ -45,7 +51,24 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     );
   }
 
+  get colliderComponent() {
+    return this.#colliderComponent;
+  }
+
+  get healthComponent() {
+    return this.#healthComponent;
+  }
+
   update(ts, dt) {
+    if (!this.active) {
+      return;
+    }
+
+    if (this.#healthComponent.isDead) {
+      this.setActive(false);
+      this.setVisible(false);
+    }
+
     this.#inputComponent.update();
     this.#horizontalMovementComponent.update();
     this.#verticalMovementComponent.update();
