@@ -16,6 +16,10 @@ export class BotScoutInputComponent extends InputComponent {
     this._left = false;
   }
 
+  set startX(val) {
+    this.#startX = val;
+  }
+
   update() {
     if (this.#gameObject.x > this.#startX + this.#maxXMovement) {
       this._left = true;
