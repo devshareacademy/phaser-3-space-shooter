@@ -10,6 +10,7 @@ import { CUSTOM_EVENTS, EventBusComponent } from '../components/events/event-bus
 import { EnemyDestroyedComponent } from '../components/spawners/enemy-destroyed-component.js';
 import { Score } from '../objects/ui/score.js';
 import { Lives } from '../objects/ui/lives.js';
+import { AudioManager } from '../objects/audio-manager.js';
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -109,5 +110,6 @@ export class GameScene extends Phaser.Scene {
 
     new Score(this, eventBusComponent);
     new Lives(this, eventBusComponent);
+    new AudioManager(this, eventBusComponent);
   }
 }

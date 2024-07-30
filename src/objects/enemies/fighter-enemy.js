@@ -73,16 +73,21 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
       this.#inputComponent,
       CONFIG.ENEMY_FIGHTER_MOVEMENT_VERTICAL_VELOCITY
     );
-    this.#weaponComponent = new WeaponComponent(this, this.#inputComponent, {
-      speed: CONFIG.ENEMY_FIGHTER_BULLET_SPEED,
-      interval: CONFIG.ENEMY_FIGHTER_BULLET_INTERVAL,
-      lifespan: CONFIG.ENEMY_FIGHTER_BULLET_LIFESPAN,
-      maxCount: CONFIG.ENEMY_FIGHTER_BULLET_MAX_COUNT,
-      yOffset: 10,
-      flipY: true,
-    });
+    this.#weaponComponent = new WeaponComponent(
+      this,
+      this.#inputComponent,
+      {
+        speed: CONFIG.ENEMY_FIGHTER_BULLET_SPEED,
+        interval: CONFIG.ENEMY_FIGHTER_BULLET_INTERVAL,
+        lifespan: CONFIG.ENEMY_FIGHTER_BULLET_LIFESPAN,
+        maxCount: CONFIG.ENEMY_FIGHTER_BULLET_MAX_COUNT,
+        yOffset: 10,
+        flipY: true,
+      },
+      this.#eventBusComponent
+    );
     this.#healthComponent = new HealthComponent(CONFIG.ENEMY_FIGHTER_HEALTH);
-    this.#colliderComponent = new ColliderComponent(this.#healthComponent);
+    this.#colliderComponent = new ColliderComponent(this.#healthComponent, this.#eventBusComponent);
     this.#eventBusComponent.emit(CUSTOM_EVENTS.ENEMY_INIT, this);
     this.#isInitialized = true;
   }

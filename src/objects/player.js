@@ -40,16 +40,21 @@ export class Player extends Phaser.GameObjects.Container {
       this.#keyboardInputComponent,
       CONFIG.PLAYER_MOVEMENT_HORIZONTAL_VELOCITY
     );
-    this.#weaponComponent = new WeaponComponent(this, this.#keyboardInputComponent, {
-      speed: CONFIG.PLAYER_BULLET_SPEED,
-      interval: CONFIG.PLAYER_BULLET_INTERVAL,
-      lifespan: CONFIG.PLAYER_BULLET_LIFESPAN,
-      maxCount: CONFIG.PLAYER_BULLET_MAX_COUNT,
-      yOffset: -20,
-      flipY: false,
-    });
+    this.#weaponComponent = new WeaponComponent(
+      this,
+      this.#keyboardInputComponent,
+      {
+        speed: CONFIG.PLAYER_BULLET_SPEED,
+        interval: CONFIG.PLAYER_BULLET_INTERVAL,
+        lifespan: CONFIG.PLAYER_BULLET_LIFESPAN,
+        maxCount: CONFIG.PLAYER_BULLET_MAX_COUNT,
+        yOffset: -20,
+        flipY: false,
+      },
+      this.#eventBusComponent
+    );
     this.#healthComponent = new HealthComponent(CONFIG.PLAYER_HEALTH);
-    this.#colliderComponent = new ColliderComponent(this.#healthComponent);
+    this.#colliderComponent = new ColliderComponent(this.#healthComponent, this.#eventBusComponent);
 
     this.#hide();
     this.#eventBusComponent.on(CUSTOM_EVENTS.PLAYER_SPAWN, this.#spawn, this);
