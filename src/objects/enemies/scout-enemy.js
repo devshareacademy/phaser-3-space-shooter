@@ -1,5 +1,5 @@
 import { ColliderComponent } from '../../components/collider/collider-component.js';
-import { CUSTOM_EVENTS } from '../../components/events/event-bus-component.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../../components/events/event-bus-component.js';
 import { HealthComponent } from '../../components/health/health-component.js';
 import { BotScoutInputComponent } from '../../components/input/bot-scout-input-component.js';
 import { HorizontalMovementComponent } from '../../components/movement/horizontal-movement-component.js';
@@ -41,22 +41,29 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     );
   }
 
+  /** @type {ColliderComponent} */
   get colliderComponent() {
     return this.#colliderComponent;
   }
 
+  /** @type {HealthComponent} */
   get healthComponent() {
     return this.#healthComponent;
   }
 
+  /** @type {string} */
   get shipAssetKey() {
     return 'scout';
   }
 
+  /** @type {string} */
   get shipDestroyedAnimationKey() {
     return 'scout_destroy';
   }
 
+  /**
+   * @param {EventBusComponent} eventBusComponent
+   */
   init(eventBusComponent) {
     this.#eventBusComponent = eventBusComponent;
     this.#inputComponent = new BotScoutInputComponent(this);
@@ -76,6 +83,9 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     this.#isInitialized = true;
   }
 
+  /**
+   * @returns {void}
+   */
   reset() {
     this.setActive(true);
     this.setVisible(true);
@@ -85,6 +95,11 @@ export class ScoutEnemy extends Phaser.GameObjects.Container {
     this.#horizontalMovementComponent.reset();
   }
 
+  /**
+   * @param {DOMHighResTimeStamp} ts
+   * @param {number} dt
+   * @returns {void}
+   */
   update(ts, dt) {
     if (!this.#isInitialized) {
       return;

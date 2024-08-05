@@ -1,22 +1,41 @@
 import { ColliderComponent } from '../../components/collider/collider-component.js';
-import { CUSTOM_EVENTS } from '../../components/events/event-bus-component.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../../components/events/event-bus-component.js';
 import { HealthComponent } from '../../components/health/health-component.js';
 import { BotFighterInputComponent } from '../../components/input/bot-fighter-input-component.js';
 import { VerticalMovementComponent } from '../../components/movement/vertical-movement-component.js';
 import { WeaponComponent } from '../../components/weapon/weapon-component.js';
 import * as CONFIG from '../../config.js';
 
+/**
+ * Used to represent the Fighter enemy ship in our game. This class is responsible
+ * for constructing all of the required components for the Fighter enemy ship.
+ * @type {import('../../types/typedef.js').Enemy}
+ */
 export class FighterEnemy extends Phaser.GameObjects.Container {
+  /** @type {boolean} */
   #isInitialized;
+  /** @type {BotFighterInputComponent} */
   #inputComponent;
-  #weaponComponent;
+  /** @type {VerticalMovementComponent} */
   #verticalMovementComponent;
+  /** @type {HealthComponent} */
   #healthComponent;
+  /** @type {ColliderComponent} */
   #colliderComponent;
-  #eventBusComponent;
+  /** @type {Phaser.GameObjects.Sprite} */
   #shipSprite;
+  /** @type {Phaser.GameObjects.Sprite} */
   #shipEngineSprite;
+  /** @type {WeaponComponent} */
+  #weaponComponent;
+  /** @type {EventBusComponent} */
+  #eventBusComponent;
 
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {number} x
+   * @param {number} y
+   */
   constructor(scene, x, y) {
     super(scene, x, y, []);
 
@@ -41,30 +60,39 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
     );
   }
 
+  /** @type {ColliderComponent} */
   get colliderComponent() {
     return this.#colliderComponent;
   }
 
+  /** @type {HealthComponent} */
   get healthComponent() {
     return this.#healthComponent;
   }
 
+  /** @type {Phaser.GameObjects.Group} */
   get weaponGameObjectGroup() {
     return this.#weaponComponent.bulletGroup;
   }
 
+  /** @type {WeaponComponent} */
   get weaponComponent() {
     return this.#weaponComponent;
   }
 
+  /** @type {string} */
   get shipAssetKey() {
     return 'fighter';
   }
 
+  /** @type {string} */
   get shipDestroyedAnimationKey() {
     return 'fighter_destroy';
   }
 
+  /**
+   * @param {EventBusComponent} eventBusComponent
+   */
   init(eventBusComponent) {
     this.#eventBusComponent = eventBusComponent;
     this.#inputComponent = new BotFighterInputComponent();
@@ -92,6 +120,9 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
     this.#isInitialized = true;
   }
 
+  /**
+   * @returns {void}
+   */
   reset() {
     this.setActive(true);
     this.setVisible(true);
@@ -99,6 +130,11 @@ export class FighterEnemy extends Phaser.GameObjects.Container {
     this.#verticalMovementComponent.reset();
   }
 
+  /**
+   * @param {DOMHighResTimeStamp} ts
+   * @param {number} dt
+   * @returns {void}
+   */
   update(ts, dt) {
     if (!this.#isInitialized) {
       return;

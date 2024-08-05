@@ -1,13 +1,48 @@
-import { CUSTOM_EVENTS } from '../events/event-bus-component.js';
+import Phaser from '../../lib/phaser.js';
+import { InputComponent } from '../input/input-component.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../events/event-bus-component.js';
 
+/**
+ * @typedef BulletConfig
+ * @type {object}
+ * @property {number} speed
+ * @property {number} interval
+ * @property {number} lifespan
+ * @property {number} maxCount
+ * @property {number} yOffset
+ * @property {boolean} flipY
+ */
+
+/**
+ * The `WeaponComponent` is used for enabling a game object to fire bullets
+ * in our game. When input is detected from the provided `InputComponent`, this
+ * component will check if we are able to fire a new bullet and do so based on the
+ * fire interval and the max number of bullets that can be on screen at a time for
+ * the attached game object.
+ *
+ * The bullet game objects are managed via a Phaser 3 Group, that way we can create
+ * a simple object pool.
+ */
 export class WeaponComponent {
+  /** @type {Phaser.GameObjects.Container} */
   #gameObject;
+  /** @type {InputComponent} */
   #inputComponent;
+  /** @type {Phaser.GameObjects.Group} */
   #bulletGroup;
+  /** @type {number} */
   #fireBulletInterval;
+  /** @type {BulletConfig} */
   #bulletConfig;
+  /** @type {EventBusComponent} */
   #eventBusComponent;
 
+  /**
+   * @param {Phaser.GameObjects.Container} gameObject
+   * @param {InputComponent} inputComponent
+   * @param {BulletConfig} bulletConfig
+   * @param {EventBusComponent} eventBusComponent
+   */
   constructor(gameObject, inputComponent, bulletConfig, eventBusComponent) {
     this.#gameObject = gameObject;
     this.#inputComponent = inputComponent;
@@ -36,10 +71,15 @@ export class WeaponComponent {
     );
   }
 
+  /** @type {Phaser.GameObjects.Group} */
   get bulletGroup() {
     return this.#bulletGroup;
   }
 
+  /**
+   * @param {number} dt
+   * @returns {void}
+   */
   update(dt) {
     this.#fireBulletInterval -= dt;
     if (this.#fireBulletInterval > 0) {
@@ -67,19 +107,28 @@ export class WeaponComponent {
     }
   }
 
+  /**
+   * @param {number} delta
+   * @returns {void}
+   */
   worldStep(delta) {
-    this.#bulletGroup.getChildren().forEach((bullet) => {
+    /** @type {Phaser.Types.Physics.Arcade.SpriteWithDynamicBody[]} */
+    (this.#bulletGroup.getChildren()).forEach((bullet) => {
       if (!bullet.active) {
         return;
       }
 
-      bullet.state -= delta;
-      if (bullet.state <= 0) {
+      /** @type {number} */
+      (bullet.state) -= delta;
+      if (/** @type {number} */ (bullet.state) <= 0) {
         bullet.disableBody(true, true);
       }
     });
   }
 
+  /**
+   * @param {Phaser.Types.Physics.Arcade.SpriteWithDynamicBody} bullet
+   */
   destroyBullet(bullet) {
     bullet.setState(0);
   }

@@ -1,3 +1,4 @@
+// player config
 export const PLAYER_LIVES = 3;
 export const PLAYER_HEALTH = 4;
 export const PLAYER_BULLET_SPEED = 300;
@@ -6,6 +7,7 @@ export const PLAYER_BULLET_LIFESPAN = 3;
 export const PLAYER_BULLET_MAX_COUNT = 10;
 export const PLAYER_MOVEMENT_HORIZONTAL_VELOCITY = 20;
 
+// enemy fighter config
 export const ENEMY_FIGHTER_SCORE = 200;
 export const ENEMY_FIGHTER_HEALTH = 2;
 export const ENEMY_FIGHTER_MOVEMENT_VERTICAL_VELOCITY = 12;
@@ -16,6 +18,7 @@ export const ENEMY_FIGHTER_BULLET_MAX_COUNT = 10;
 export const ENEMY_FIGHTER_GROUP_SPAWN_INTERVAL = 6000;
 export const ENEMY_FIGHTER_GROUP_SPAWN_START = 3000;
 
+// enemy scout config
 export const ENEMY_SCOUT_SCORE = 100;
 export const ENEMY_SCOUT_HEALTH = 2;
 export const ENEMY_SCOUT_MOVEMENT_MAX_X = 40;
@@ -24,6 +27,7 @@ export const ENEMY_SCOUT_MOVEMENT_HORIZONTAL_VELOCITY = 9;
 export const ENEMY_SCOUT_GROUP_SPAWN_INTERVAL = 5000;
 export const ENEMY_SCOUT_GROUP_SPAWN_START = 1000;
 
+// component config
 export const COMPONENT_MOVEMENT_VERTICAL_DRAG = 0.01;
 export const COMPONENT_MOVEMENT_VERTICAL_MAX_VELOCITY = 200;
 export const COMPONENT_MOVEMENT_HORIZONTAL_DRAG = 0.01;
