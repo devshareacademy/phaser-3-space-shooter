@@ -15,6 +15,7 @@ export class Score extends Phaser.GameObjects.Text {
       fontSize: '24px',
       color: '#ff2f66',
     });
+
     this.scene.add.existing(this);
     this.#eventBusComponent = eventBusComponent;
     this.#score = 0;

@@ -35,6 +35,7 @@ export class Lives extends Phaser.GameObjects.Container {
           fontSize: '24px',
         })
         .setOrigin(0.5);
+
       this.#eventBusComponent.emit(CUSTOM_EVENTS.GAME_OVER);
     });
 
