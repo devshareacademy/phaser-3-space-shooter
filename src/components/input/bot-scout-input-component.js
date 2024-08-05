@@ -42,11 +42,11 @@ export class BotScoutInputComponent extends InputComponent {
   /**
    * Used for resetting the default starting X position of the Phaser 3 game object since
    * we reuse the same Game Objects in our game.
-   * @param {number} x
+   * @param {number} val
    * @returns {void}
    */
-  setStartX(x) {
-    this.#startX = x;
+  set startX(val) {
+    this.#startX = val;
   }
 
   /**
