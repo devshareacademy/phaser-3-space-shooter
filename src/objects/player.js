@@ -1,26 +1,44 @@
 import { ColliderComponent } from '../components/collider/collider-component.js';
-import { CUSTOM_EVENTS } from '../components/events/event-bus-component.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../components/events/event-bus-component.js';
 import { HealthComponent } from '../components/health/health-component.js';
 import { KeyboardInputComponent } from '../components/input/keyboard-input-component.js';
 import { HorizontalMovementComponent } from '../components/movement/horizontal-movement-component.js';
 import { WeaponComponent } from '../components/weapon/weapon-component.js';
 import * as CONFIG from '../config.js';
 
+/**
+ * Used to represent the players ship in our game. This class is responsible
+ * for constructing all of the required components for our Player ship.
+ */
 export class Player extends Phaser.GameObjects.Container {
+  /** @type {KeyboardInputComponent} */
   #keyboardInputComponent;
-  #weaponComponent;
-  #horizontalMovementComponent;
+  /** @type {HealthComponent} */
   #healthComponent;
+  /** @type {WeaponComponent} */
+  #weaponComponent;
+  /** @type {HorizontalMovementComponent} */
+  #horizontalMovementComponent;
+  /** @type {ColliderComponent} */
   #colliderComponent;
+  /** @type {EventBusComponent} */
   #eventBusComponent;
+  /** @type {Phaser.GameObjects.Sprite} */
   #shipSprite;
+  /** @type {Phaser.GameObjects.Sprite} */
   #shipEngineSprite;
+  /** @type {Phaser.GameObjects.Sprite} */
   #shipEngineThrusterSprite;
 
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {EventBusComponent} eventBusComponent
+   */
   constructor(scene, eventBusComponent) {
     super(scene, scene.scale.width / 2, scene.scale.height - 32, []);
     this.#eventBusComponent = eventBusComponent;
 
+    // add game object to scene and enabled physics body
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.setSize(24, 24);
@@ -57,8 +75,11 @@ export class Player extends Phaser.GameObjects.Container {
     this.#colliderComponent = new ColliderComponent(this.#healthComponent, this.#eventBusComponent);
 
     this.#hide();
+
+    // register custom events
     this.#eventBusComponent.on(CUSTOM_EVENTS.PLAYER_SPAWN, this.#spawn, this);
 
+    // handle automatic call to update
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     this.once(
       Phaser.GameObjects.Events.DESTROY,
@@ -68,22 +89,32 @@ export class Player extends Phaser.GameObjects.Container {
       this
     );
   }
+
+  /** @type {ColliderComponent} */
   get colliderComponent() {
     return this.#colliderComponent;
   }
 
+  /** @type {HealthComponent} */
   get healthComponent() {
     return this.#healthComponent;
   }
 
+  /** @type {Phaser.GameObjects.Group} */
   get weaponGameObjectGroup() {
     return this.#weaponComponent.bulletGroup;
   }
 
+  /** @type {WeaponComponent} */
   get weaponComponent() {
     return this.#weaponComponent;
   }
 
+  /**
+   * @param {DOMHighResTimeStamp} ts
+   * @param {number} dt
+   * @returns {void}
+   */
   update(ts, dt) {
     if (!this.active) {
       return;
@@ -105,6 +136,9 @@ export class Player extends Phaser.GameObjects.Container {
     this.#weaponComponent.update(dt);
   }
 
+  /**
+   * @returns {void}
+   */
   #hide() {
     this.setActive(false);
     this.setVisible(false);
@@ -113,6 +147,9 @@ export class Player extends Phaser.GameObjects.Container {
     this.#keyboardInputComponent.lockInput = true;
   }
 
+  /**
+   * @returns {void}
+   */
   #spawn() {
     this.setActive(true);
     this.setVisible(true);

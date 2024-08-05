@@ -1,9 +1,21 @@
-import { CUSTOM_EVENTS } from '../components/events/event-bus-component.js';
+import Phaser from '../lib/phaser.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../components/events/event-bus-component.js';
 
+/**
+ * Responsible for managing the audio in our game by reacting to various
+ * events in our game.
+ */
 export class AudioManager {
+  /** @type {Phaser.Scene} */
   #scene;
+
+  /** @type {EventBusComponent} */
   #eventBusComponent;
 
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {EventBusComponent} eventBusComponent
+   */
   constructor(scene, eventBusComponent) {
     this.#scene = scene;
     this.#eventBusComponent = eventBusComponent;

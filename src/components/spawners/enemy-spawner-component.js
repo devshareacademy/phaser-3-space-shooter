@@ -1,13 +1,35 @@
 import Phaser from '../../lib/phaser.js';
-import { CUSTOM_EVENTS } from '../events/event-bus-component.js';
+import { CUSTOM_EVENTS, EventBusComponent } from '../events/event-bus-component.js';
 
+/**
+ * Creates a Phaser 3 Group that is used for spawning enemy
+ * game objects in our game. This spawner component will generate
+ * new enemies on an interval, and spawn those enemies in random
+ * locations outside our Phaser 3 Scene.
+ *
+ * The Phaser 3 Group is used to create a simple object pool that allows
+ * us to reuse the enemy game objects that are created.
+ */
 export class EnemySpawnerComponent {
+  /** @type {Phaser.Scene} */
   #scene;
+  /** @type {number} */
   #spawnInterval;
+  /** @type {number} */
   #spawnAt;
+  /** @type {Phaser.GameObjects.Group} */
   #group;
+  /** @type {boolean} */
   #disableSpawning;
 
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {Function} enemyClass
+   * @param {object} spawnConfig
+   * @param {number} spawnConfig.interval
+   * @param {number} spawnConfig.spawnAt
+   * @param {EventBusComponent} eventBusComponent
+   */
   constructor(scene, enemyClass, spawnConfig, eventBusComponent) {
     this.#scene = scene;
 
@@ -16,7 +38,7 @@ export class EnemySpawnerComponent {
       name: `${this.constructor.name}-${Phaser.Math.RND.uuid()}`,
       classType: enemyClass,
       runChildUpdate: true,
-      createCallback: (enemy) => {
+      createCallback: (/** @type {import('../../types/typedef.js').Enemy} */ enemy) => {
         enemy.init(eventBusComponent);
       },
     });
@@ -41,10 +63,16 @@ export class EnemySpawnerComponent {
     });
   }
 
+  /** @type {Phaser.GameObjects.Group} */
   get phaserGroup() {
     return this.#group;
   }
 
+  /**
+   * @param {DOMHighResTimeStamp} ts
+   * @param {number} dt
+   * @returns {void}
+   */
   update(ts, dt) {
     if (this.#disableSpawning) {
       return;
@@ -61,8 +89,12 @@ export class EnemySpawnerComponent {
     this.#spawnAt = this.#spawnInterval;
   }
 
+  /**
+   * @returns {void}
+   */
   worldStep(delta) {
-    this.#group.getChildren().forEach((enemy) => {
+    /** @type {import('../../types/typedef.js').Enemy[]} */
+    (this.#group.getChildren()).forEach((enemy) => {
       if (!enemy.active) {
         return;
       }
