@@ -1,4 +1,3 @@
-import Phaser from '../../lib/phaser.js';
 import { InputComponent } from './input-component.js';
 
 export class KeyboardInputComponent extends InputComponent {
@@ -8,6 +7,7 @@ export class KeyboardInputComponent extends InputComponent {
   constructor(scene) {
     super();
     this.#cursorKeys = scene.input.keyboard.createCursorKeys();
+    this.#inputLocked = false;
   }
 
   set lockInput(val) {

@@ -1,4 +1,3 @@
-import Phaser from '../../lib/phaser.js';
 import { CUSTOM_EVENTS } from '../events/event-bus-component.js';
 
 export class WeaponComponent {
@@ -82,6 +81,6 @@ export class WeaponComponent {
   }
 
   destroyBullet(bullet) {
-    bullet.state = 0;
+    bullet.setState(0);
   }
 }

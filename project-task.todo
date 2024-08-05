@@ -6,16 +6,18 @@ Project Setup:
   ☐ code planning
 
 Player:
+  ☐ loading assets
+  ☐ creating animations
   ☐ create game objects
   ☐ create animations
   ☐ input and player movement
-  ☐ weapon
 
 Enemies:
   ☐ create game object
   ☐ create animations
   ☐ basic AI movement
-  ☐ weapon
+  ☐ weapons
+  ☐ phaser update and delta time
 
 Collisions:
   ☐ collisions between enemies and player

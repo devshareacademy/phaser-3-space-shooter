@@ -12,12 +12,12 @@ export class BotScoutInputComponent extends InputComponent {
     this.#startX = this.#gameObject.x;
     this.#maxXMovement = CONFIG.ENEMY_SCOUT_MOVEMENT_MAX_X;
     this._right = true;
-    this._left = false;
     this._down = true;
+    this._left = false;
   }
 
-  setStartX(x) {
-    this.#startX = x;
+  set startX(val) {
+    this.#startX = val;
   }
 
   update() {

@@ -32,8 +32,8 @@ export class InputComponent {
   reset() {
     this._up = false;
     this._down = false;
-    this._right = false;
     this._left = false;
+    this._right = false;
     this._shoot = false;
   }
 }

@@ -1,4 +1,3 @@
-import Phaser from '../../lib/phaser.js';
 import { CUSTOM_EVENTS } from '../../components/events/event-bus-component.js';
 import * as CONFIG from '../../config.js';
 
